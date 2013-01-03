@@ -6,7 +6,6 @@ def compute_msd(r, interval):
     count = np.zeros( (r.shape[0],) )
     n_total = r.shape[0]
     n_interval = n_total/interval
-    print n_interval
     for i in range(n_interval):
         rsqr = np.sum( (r[i*interval:]-r[i*interval])**2, axis=2 )
         print rsqr.shape, i*interval
