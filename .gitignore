@@ -1,0 +1,13 @@
+*~
+*.o
+*.py[ocd]
+*.a
+.DS_Store?
+
+/md-tools/version.py
+/build
+/dist
+/doc/build
+/doc/html
+
+MANIFEST
