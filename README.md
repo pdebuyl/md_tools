@@ -22,6 +22,8 @@ md_tools requirements:
   - NumPy
   - Scientific version >= 2.8
 
+Installation instructions
+
     python setup.py install --user
 
 installs md_tools for the current user
