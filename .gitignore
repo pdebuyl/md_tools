@@ -4,6 +4,8 @@
 *.a
 .DS_Store?
 
+md_tools/_*.c
+
 /md-tools/version.py
 /build
 /dist

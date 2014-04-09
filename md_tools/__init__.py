@@ -1,2 +1,4 @@
 """
 """
+
+from rdf import *
