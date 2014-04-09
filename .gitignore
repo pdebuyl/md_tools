@@ -5,6 +5,7 @@
 .DS_Store?
 
 md_tools/_*.c
+doc/*.html
 
 /md-tools/version.py
 /build

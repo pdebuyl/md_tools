@@ -1,0 +1,23 @@
+% Radial Distribution Function
+
+The rdf module contains `compute_rdf`, a routine to compute multi-species (and
+multi-state) radial distributions from a set of coordinates.
+
+Algorithm
+---------
+
+`compute_rdf` computes the species- and state-wise distributions for a system of
+particles with positions $r_i$, species $s_i$ and state $st_i$.
+
+The number of those distributions is $n_{idx}=\sum_{s=1,N_s} n\_st[s]$, where
+$n\_st[s]$ is the number of states allowed for species $s$.
+
+The distributions $rdf_{ab}$ are indexed by the species labels $a$ and $b$ but
+only $n_{idx}(n_{idx}+1)/2$ rdfs are stored, assuming $a\leq b$.
+
+$$
+rdf_{ab}(r) = \sum_{i<j} \mathrm{bin}_r(|r_i - r_j|) (\delta_{a s_i}\delta_{b s_j} + \delta_{a s_j}\delta_{b s_i})
+$$
+
+A consequence of storing only $rdf_{ab}$ with $a\leq b$ is that for $a\neq b$
+the counting is doubled.

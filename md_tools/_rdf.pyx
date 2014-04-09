@@ -127,7 +127,7 @@ cdef _compute_rdf(double[:, ::1] r, double[3] L, int N, double dx, int n_rdf,
                 idx = int(floor(sqrt(dist_sqr)*inv_dx))
                 result[rdf_idx,idx] += 1
 
-    k = 4*pi*dx
+    k = 2*pi*dx
     for i in range(result.shape[0]):
         for j in range(result.shape[1]):
             result[i,j] = result[i,j] / (k*((j+0.5)*dx)**2)
