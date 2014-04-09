@@ -16,8 +16,11 @@ The distributions $rdf_{ab}$ are indexed by the species labels $a$ and $b$ but
 only $n_{idx}(n_{idx}+1)/2$ rdfs are stored, assuming $a\leq b$.
 
 $$
-rdf_{ab}(r) = \sum_{i<j} \mathrm{bin}_r(|r_i - r_j|) (\delta_{a s_i}\delta_{b s_j} + \delta_{a s_j}\delta_{b s_i})
+rdf_{ab}(r) = \frac{1}{2 \pi dx} \sum_{i<j} \frac{\mathrm{bin}_r(|r_i - r_j|)}{r^2} (\delta_{a s_i}\delta_{b s_j} + \delta_{a s_j}\delta_{b s_i})
 $$
+
+where $\mathrm{bin}_r(x)=1$ if $r \leq x < r+dx$ and $0$ else, $dx$ is the bin
+size for the distribution.
 
 A consequence of storing only $rdf_{ab}$ with $a\leq b$ is that for $a\neq b$
 the counting is doubled.
