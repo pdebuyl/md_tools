@@ -1,4 +1,4 @@
-html: index.html rdf.html
+html: index.html rdf.html README.html
 
 MATHJAX_URL=/usr/share/javascript/mathjax/unpacked/MathJax.js
 
