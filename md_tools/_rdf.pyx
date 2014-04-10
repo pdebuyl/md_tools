@@ -85,6 +85,7 @@ cdef _compute_rdf(double[:, ::1] r, double[3] L, int N, double dx, int n_rdf,
 
     cdef double[:,::1] result = np.zeros( (n_rdf, N) )
     cdef int[::1] idx_root = np.zeros( (n_species,), dtype=np.int32 )
+    cdef double[::1] count_fix = np.zeros( (n_rdf,) )
 
     n_idx = n_state[0]
     idx_root[0] = 0
@@ -127,8 +128,16 @@ cdef _compute_rdf(double[:, ::1] r, double[3] L, int N, double dx, int n_rdf,
                 idx = int(floor(sqrt(dist_sqr)*inv_dx))
                 result[rdf_idx,idx] += 1
 
-    k = 2*pi*dx
+    # For non-diagonal elements (cross-species) rdf elements, divide the result
+    # by 2 to avoid double-counting the rdf.
+    for i in range(n_rdf):
+        count_fix[i] = 2.
+    # Set diagonal elements to one.
+    for i in range(n_idx):
+        count_fix[ i*(i+1)/2 + i ] = 1.
+
     for i in range(result.shape[0]):
+        k = 2*pi*dx*count_fix[i]
         for j in range(result.shape[1]):
             result[i,j] = result[i,j] / (k*((j+0.5)*dx)**2)
 

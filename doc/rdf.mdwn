@@ -10,17 +10,28 @@ Algorithm
 particles with positions $r_i$, species $s_i$ and state $st_i$.
 
 The number of those distributions is $n_{idx}=\sum_{s=1,N_s} n\_st[s]$, where
-$n\_st[s]$ is the number of states allowed for species $s$.
+$n_{st}[s]$ is the number of states allowed for species $s$. If the state $st$
+of the particles is defined, the species index runs from $0$ to $n_{idx}-1$,
+labeling all the states of species $0$ first, etc.
 
 The distributions $rdf_{ab}$ are indexed by the species labels $a$ and $b$ but
 only $n_{idx}(n_{idx}+1)/2$ rdfs are stored, assuming $a\leq b$.
 
 $$
-rdf_{ab}(r) = \frac{1}{2 \pi dx} \sum_{i<j} \frac{\mathrm{bin}_r(|r_i - r_j|)}{r^2} (\delta_{a s_i}\delta_{b s_j} + \delta_{a s_j}\delta_{b s_i})
+rdf_{ab}(r) = \frac{1}{2 \pi dx (2-\delta_{ab})} \sum_{i<j} \frac{\mathrm{bin}_r(|r_i - r_j|)}{r^2} (\delta_{a s_i}\delta_{b s_j} + \delta_{a s_j}\delta_{b s_i})
 $$
 
 where $\mathrm{bin}_r(x)=1$ if $r \leq x < r+dx$ and $0$ else, $dx$ is the bin
 size for the distribution.
 
 A consequence of storing only $rdf_{ab}$ with $a\leq b$ is that for $a\neq b$
-the counting is doubled.
+the counting is doubled. This doubling is corrected by the $2-\delta_{ab}$
+factor.
+
+The rdf in not corrected for the particle number. To obtain the number density
+of species $b$ as limiting value for large $r$, use $rdf_{ab}(r) / N_a$ where
+$N_a$ is the number of particles of species $a$.
+
+`compute_rdf`
+
+  : Returns `dx`, `result[n_rdf]`, `count[n_idx]`
