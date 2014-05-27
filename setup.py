@@ -10,5 +10,5 @@ setup(name="md_tools",
       maintainer_email="pdebuyl at ulb dot ac dot be",
       license="BSD", url="http://pdebuyl.be/",
       packages=["md_tools"],
-      ext_modules = cythonize("md_tools/_rdf.pyx"),
+      ext_modules = cythonize(["md_tools/_rdf.pyx", "md_tools/_cell_based_rdf.pyx"]),
 )
